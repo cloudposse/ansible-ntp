@@ -13,6 +13,11 @@ name: ansible-ntp
 # License of this project
 license: "MIT"
 
+copyrights:
+  - name: "Jeff Geerling"
+    url: "https://github.com/geerlingguy"
+    year: "2017"
+
 # Canonical GitHub repo
 github_repo: cloudposse/ansible-ntp
 
@@ -83,6 +88,11 @@ examples: |-
   *Inside `vars/main.yml`*:
     ntp_timezone: America/Chicago
   ```
+
+references:
+- name: "ansible-role-nt"
+  description: "Ansible Role - NTP"
+  url: "https://github.com/geerlingguy/ansible-role-ntp"
 
 # Contributors to this project
 contributors:
