@@ -1,0 +1,106 @@
+---
+#
+# This is the canonical configuration for the `README.md`
+# Run `make readme` to rebuild the `README.md`
+#
+
+# Name of this project
+name: ansible-ntp
+
+# Logo for this project
+#logo: docs/logo.png
+
+# License of this project
+license: "MIT"
+
+copyrights:
+  - name: "Jeff Geerling"
+    url: "https://github.com/geerlingguy"
+    year: "2017"
+
+# Canonical GitHub repo
+github_repo: cloudposse/ansible-ntp
+
+# Badges to display
+badges:
+  - name: "Build Status"
+    image: "https://travis-ci.org/cloudposse/ansible-ntp.svg?branch=master"
+    url: "https://travis-ci.org/cloudposse/ansible-ntp"
+  - name: "Latest Release"
+    image: "https://img.shields.io/github/release/cloudposse/ansible-ntp.svg"
+    url: "https://github.com/cloudposse/ansible-ntp/releases/latest"
+  - name: "Slack Community"
+    image: "https://slack.cloudposse.com/badge.svg"
+    url: "https://slack.cloudposse.com"
+
+# Short description of this project
+description: |-
+  Installs NTP on Linux.
+
+  ## Requirements
+
+  None.
+
+  ## Role Variables
+
+  Available variables are listed below, along with default values (see `defaults/main.yml`):
+
+      ntp_enabled: true
+
+  Whether to start the ntpd service and enable it at system boot. On many virtual machines that run inside a container (like OpenVZ or VirtualBox), it's recommended you don't run the NTP daemon, since the host itself should be set to synchronize time for all it's child VMs.
+
+      ntp_timezone: Etc/UTC
+
+  Set the timezone for your server.
+
+      ntp_manage_config: false
+
+  Set to true to allow this role to manage the NTP configuration file (`/etc/ntp.conf`).
+
+      ntp_area: ''
+
+  Set the [NTP Pool Area](http://support.ntp.org/bin/view/Servers/NTPPoolServers) to use. Defaults to none, which uses the worldwide pool.
+
+      ntp_servers:
+        - "0{{ ntp_area }}.pool.ntp.org iburst"
+        - "1{{ ntp_area }}.pool.ntp.org iburst"
+        - "2{{ ntp_area }}.pool.ntp.org iburst"
+        - "3{{ ntp_area }}.pool.ntp.org iburst"
+
+  Specify the NTP servers you'd like to use. Only takes effect if you allow this role to manage NTP's configuration, by setting `ntp_manage_config` to `true`.
+
+      ntp_restrict:
+        - "127.0.0.1"
+        - "::1"
+
+  Restrict NTP access to these hosts; loopback only, by default.
+
+  ## Dependencies
+
+  None.
+# How to use this project
+examples: |-
+  ```yaml
+  - hosts: all
+    roles:
+      - geerlingguy.ntp
+
+  *Inside `vars/main.yml`*:
+    ntp_timezone: America/Chicago
+  ```
+
+references:
+- name: "ansible-role-nt"
+  description: "Ansible Role - NTP"
+  url: "https://github.com/geerlingguy/ansible-role-ntp"
+
+# Contributors to this project
+contributors:
+  - name: "Jeff Geerling"
+    github: "geerlingguy"
+  - name: "Jirayut Nimsaeng (Dear)"
+    github: "winggundamth"
+  - name: "Kade Cole"
+    github: "kadecole"
+  - name: "Patrick Dreker"
+    github: "pdreker"
